@@ -13,7 +13,7 @@ clean_exit() {
 
 # Use oxipng if in GH Actions
 if [ $GITHUB_ACTIONS ]; then
-	wget -O - 'https://github.com/shssoichiro/oxipng/releases/download/v5.0.1/oxipng-5.0.1-x86_64-unknown-linux-musl.tar.gz' \
+	wget -O - 'https://github.com/shssoichiro/oxipng/releases/download/v9.1.1/oxipng-9.1.1-x86_64-unknown-linux-musl.tar.gz' \
 		| tar --strip-components 1 -xzvf -
 fi
 
