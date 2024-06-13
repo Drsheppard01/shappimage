@@ -42,12 +42,13 @@ Eventually I would like to make a proper tool for building shImgs, but for the
 time being, manually building is simple enough.
 
   1. Assemble an [AppDir](#appdir)
-  2. Compress the AppDir into a SquashFS image `mksquashfs AppDir AppDir.sqfs -b1M
-     -comp lz4 -Xhc`
+  2. Compress the AppDir into a SquashFS image `mksquashfs AppDir AppDir.sqfs
+     -b1M -comp lz4 -Xhc`
      * LZ4 should be used for applications where launch speed is preferred, ZSTD
        should be used in applications where maximum compression is preferred.
   4. Download or build the shImg runtime
-  5. Concatenate the runtime and filesystem image `cat runtime AppDir.sqfs > app.shImg`
+  5. Concatenate the runtime and filesystem image `cat
+     runtime-[COMPRESSION]-[ARCHITECTURES] AppDir.sqfs > app.shImg`
 
 At this point, the shImg should be a working application given that it's marked
 executable or launched directly through the interpreter (eg: `sh ./app.shImg`)
@@ -59,8 +60,9 @@ final structure is decided on and software is made to supoort it)
 
 An [AppDir](https://docs.appimage.org/reference/appdir.html) is composed of all
 the files your application requires to run. It should be arranged in 
-[FHS](https://refspecs.linuxfoundation.org/FHS_3.0/fhs/index), although anything
-works so long as your application is configured to load from relative locations.
+[FHS](https://refspecs.linuxfoundation.org/FHS_3.0/fhs/index), although any file
+layout works so long as your application is configured to load from relative
+locations.
 
   * Applications *MUST* not use absolute paths for loading built-in resources
   * Applications should make as few assumptions about the base system as reasonably
